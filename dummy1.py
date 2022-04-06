@@ -1,4 +1,4 @@
-
+'''
 
 from re import T
 import easygui as eg
@@ -46,3 +46,4 @@ but1 = driver.find_element(by = By.ID, value = "page")
     bk = bk.find_element(by = By.ID, value = "content")
     bk = bk.find_element(by = By.ID, value = "times")
 
+'''
