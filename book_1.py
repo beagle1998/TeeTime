@@ -41,7 +41,7 @@ def time_inputs(): #asks user for time inputs
 
 def time_within(t_range,t_s):#check if time is within timeframe
     tt = t_range + [t_s]
-    #print(tt)
+    print(tt)
     t_r = []
     for i in tt:
         
@@ -49,7 +49,7 @@ def time_within(t_range,t_s):#check if time is within timeframe
             t_r.append(int(i[:-5]+i[-4:-2]))
         else:
             t_r.append(int(i[:-5]+i[-4:-2])+1200)
-    #print(t_r)
+    print(t_r)
     if t_r[2] < t_r[0]:
         return -1
     return t_r[0] <= t_r[2] <= t_r[1]
@@ -60,12 +60,42 @@ def los_button():
     print("\nSTART")
     driver.get("https://foreupsoftware.com/index.php/booking/20330/4502#/teetimes")
     #time.sleep(2)
-    but1 = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='content']/div/button"))
+    but1 = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='content']/div/h3/a/img"))
 
     but1.click()
-    #driver.refresh()
+
+    time.sleep(3)
+    window_after = driver.window_handles[1]
+    driver.switch_to.window(window_after)
     print("FIN\n")
 
+
+def log_in():#login after getting to right site
+    li = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/div/div/div[2]/a[1]"))
+    li.click()
+
+def url_date():#change url to manipulate date
+    url = driver.current_url
+    print(url)
+    #&date=2022-04-18
+   
+    d = url.index("date")
+
+    x = datetime.datetime.now()
+    x+=datetime.timedelta(days = 9) #calculate day ahead date
+    x = str(x).split()
+    #x = x[0].split("-")
+
+    print(x)#['2022', '04', '15']
+    url = url[:d+4] + x[0] 
+    print(url)
+    driver.get(url)
+    time.sleep(1)
+
+
+
+
+    
 def date_advance():
 
     #go 9 days ahead, check the bookings time 
@@ -73,14 +103,49 @@ def date_advance():
     x+=datetime.timedelta(days = 9) #calculate day ahead date
     x = str(x).split()
     x = x[0].split("-")
-    str_date = x[1]+"-"+x[2]+"-"+x[0]
+    print(x)#['2022', '04', '15']
 
+    str_date = x[1]+"-"+x[2]+"-"+x[0]
+    print(str_date)#04-15-2022
     #bbut = driver.find_element(by = By.ID, value = "page")
     #bbut = bbut.find_element(by = By.ID, value = "nav")
-    
-    bbut =  WebDriverWait(driver,timeout = 10).until(lambda d: d.find_elements(by = By.XPATH, value = "//td[@class='day']"))
+    #new click on the date to open
 
-    bbut[-1].click()
+    date =  WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div/div[2]/div/div[1]/div/div/div/input"))
+    date.click()
+
+    pointer = date
+    print("Got the month?")
+    #0)
+    #time.sleep(1)
+    
+    #and then click the last/available date
+    #month
+    month =  WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div[2]/div[2]"))
+    #bbut =  WebDriverWait(bbut,timeout = 10).until(lambda d: d.find_elements())
+    weeks = month.find_elements(by = By.XPATH, value = ".//*")#items under month = weeks multiple
+    find = False
+    for w in weeks:#items in weeks = a week
+        days = w.find_elements(by = By.XPATH, value = ".//*") #getting days in a week
+        for d in days:
+            #print(d.text) 
+            if d.text == x[2]:
+                find = True
+                pointer = d
+                d.click()
+                break
+        if find:
+            break
+    #the magnifying glass set date button
+    set_date = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div/div[5]/img")) #getting days in a week
+    set_date.click()
+    #bbut = bbut.find_elements(by = By.XPATH, value = ".//*")
+    #for e in bbut:
+        #print(e.text)
+
+    #bbut =  WebDriverWait(driver,timeout = 10).until(lambda d: d.find_elements(by = By.XPATH, value = "//td[@class='day']"))
+
+    #bbut[-1].click()
     time.sleep(1)#wait for the new date to load
 
 
@@ -88,41 +153,56 @@ def date_advance():
 
 def book_time(times):#check listed times for the current date #arg ["12:00pm","5:00pm"]
 
-    bk = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_elements(by = By.XPATH, value = "//li[contains(@class,'time-legacy')]"))
-
+    times_c = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[5]/div[2]/ul"))
+    times_c = times_c.find_elements(by = By.XPATH, value = ".//li") # the times for a day
     book_list = []# [time,hole,party_size,fee,cart_fee] # fee*party_size = total 
                 #ex, ['4:10pm','18', '4', '$26.00', '+$12.50']
-    
-    for i in range(len(bk)):
+    print("book time start")
+    for i in range(len(times_c)):#iterating through the different times(start->finish for a day)
         #print(i,"I range")
-        t = bk[i]
+        t = times_c[i]
         #print(t.text)
         time.sleep(1)
+        #print(t.text)
         tt = (t.text).split("\n")
-        ttt = tt[3].replace(" ","")
-        book_list.append(tt[:3]+[ttt]+[tt[4]]) #['4:10pm','18', '4', '$26.00', '+$12.50']
+        print(tt)
+        ttt = tt[0].replace(" ","")#3:50 pm -> 3:50pm
+        tt[0] = ttt.lower()
+        book_list.append(tt)
         print(tt[0])
-        if time_within(times,book_list[-1][0]) == -1:
+        
+        if time_within(times,tt[0]) == -1:
             continue
-        elif time_within(times,book_list[-1][0]): #if t[0] == time
-            t.click()
+        elif time_within(times,tt[0]): #if t[0] == time
+            t.click()#click on the time
             print("Got here")
-            bt = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='book_time']/div/div[3]/button[1]"))
+            rates = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div[2]/ul"))
+            rates = rates.find_elements(by = By.XPATH, value = ".//*")
             #print(bt.text)
             time.sleep(1)
-            bt.click()#book time
-            bt = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='login']/div/div[3]/div[1]/button[2]"))
-            bt.click()#close
+            rates[1].click()#book rate/cart or not time #click the s2wnd one
 
-            time.sleep(1)#give time to load after exit, and set bk to the new page/refresh
-            bk = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_elements(by = By.XPATH, value = "//li[contains(@class,'time-legacy')]"))
+            time.sleep(30)#onto payment confirmation page, not refresh
 
-            #to do incorporate, delete break, find why text.split stale element
-            #time.sleep(2)
-            #for testing, will close the login/register so it will go through multiple times
+            '''
+            #increase player count +
+           # player_count_plus = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/main/div[1]/section/section[2]/div/button[2]/i"))
+           # player_count_plus.click()
+           # time.sleep(1)
+
+            term = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/main/div[2]/section[2]/div[1]/div[1]/label"))
+            term.click()
+
+            #final confirmation button
+            book_now = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/main/div[2]/section[2]/div[2]/div/button"))
+            book_now.click()
+            '''
+            #don't know how to exit/go back because need log in
+            break#get rid later
         else:
             break
-            
+        
+        #ttt = tt[3].replace(" ","")
     #print(book_list)
 
     #with the specified time frame/time slot, find if it has.
@@ -141,9 +221,10 @@ days,times = ["Sunday","Wednesday","Saturday"],["5:00pm","6:00pm"]
 
 los_button()
 
+#log_in()
+#url_date()
 
 date_advance()#dates to click on (days)
-
 book_time(times)#timeframes to book
 time.sleep(30)
 #sleep/give time to see
