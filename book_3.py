@@ -72,7 +72,7 @@ def log_in():#login after getting to right site
     #li.click()
     driver.find_element(by = By.XPATH, value = "//*[@id='email']").send_keys(email)
     driver.find_element(by = By.XPATH, value = "//*[@id='password']").send_keys(password + Keys.ENTER)
-
+    
 def date_in():
     return "date" in driver.current_url
 
@@ -140,7 +140,8 @@ def book_time():#check listed times for the current date #arg ["12:00pm","5:00pm
             t.click()#click on the time
             #print("Got here")
             rates = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div[2]/ul"))
-            rates = rates.find_elements(by = By.XPATH, value = ".//*")
+            #rates = rates.find_elements(by = By.XPATH, value = ".//*")
+            rates = rates.find_elements(by = By.TAG_NAME, value = "li")
             #print(bt.text)
             #time.sleep(1)
             for book_types in rates:
