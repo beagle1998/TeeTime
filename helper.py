@@ -65,6 +65,12 @@ def threading1():
 
     schedule_time = datetime.datetime.now()
 
+    schedule_time = schedule_time.replace(hour = 0, minute = 25, second = 0) #for 9am
+    #d = datetime.datetime(2009, 10, 5, 18, 00) specify to 9am?
+    #date = datetime.strptime('26 Sep 2012', '%d %b %Y')
+    
+
+
     #threading.Timer(10,threading1).start() #every 10 seconds, check the current time
     now = datetime.datetime.now()
     print("current time = ", now.strftime("%M:%S"))
@@ -74,8 +80,9 @@ def threading1():
     
     while not client.is_closed():
         now = datetime.datetime.now()
-        if schedule_time  <= now:
+        if schedule_time  <= now: #if now.strftime("%H:$M") == ?
             schedule_time += datetime.timedelta(minutes = 1)
+            schedule_time += datetime.timedelta(hours = 24)
             print(schedule_time)
             #channel = client.get_channel(845458791918469180)
             #channel.send("What days and times to search: \n Days: " + str(days) + "\n Times: " + str(times))
@@ -87,7 +94,7 @@ def threading1():
             #add one day to schedule_time to repeat on next day
             print("schedu looped")
         time.sleep(10)
-        print(1)
+        print("10s")
 
 
 '''
@@ -192,7 +199,9 @@ def book_time():#check listed times for the current date #arg ["12:00pm","5:00pm
             rates = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/div[4]/div[2]/ul"))
             rates = rates.find_elements(by = By.TAG_NAME, value = "li")
             rates[1].click()#book rate/cart or not time #click the s2wnd one  1 == no cart, 0 == car
-
+            
+            #crossed out for testing purpose, will stop after clicking the book rate
+            time.sleep(5) #get rid of this for real
             '''
             for n in range(2):# #increase player count + default 2 + 2 = 4
                 player_count_plus = WebDriverWait(driver,timeout = 10).until(lambda d: d.find_element(by = By.XPATH, value = "//*[@id='__next']/div/main/div/section/main/div[1]/section/section[2]/div/button[2]/i")).click()
