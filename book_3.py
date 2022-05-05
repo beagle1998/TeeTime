@@ -33,7 +33,7 @@ service = ChromeService(executable_path=ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 
 tee_date_url = "https://letsgo.golf/los-verdes-golf-course/teeTimes/los-verdes-golf-course-california?date=" #the url booking a specific day
-days,times = ["Sunday","Wednesday","Saturday"],["4:00pm","6:00pm"]
+days,times = ["Sunday","Wednesday","Saturday"],["5:00pm","6:00pm"]
 days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] #all default
 book_list = []
 #email, password = "praiseper02@gmail.com", "Pyrian#863" personal dummy no credit
@@ -147,19 +147,7 @@ def book_time():#check listed times for the current date #arg ["12:00pm","5:00pm
             for book_types in rates:
                 print(book_types.text)
             rates[1].click()#book rate/cart or not time #click the s2wnd one  1 == no cart, 0 == cart
-            time.sleep(30)#not sure if clicking one with or without cart check here
-
-
-
-
-
-
-
-
-
-
-
-
+            #time.sleep(30)#not sure if clicking one with or without cart check here
             
             #time.sleep(30)#onto payment confirmation page, not refresh
 
