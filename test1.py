@@ -27,7 +27,7 @@ from discord_webhook import DiscordWebhook
 client = discord.Client()
 
 #this is for heroku
-'''
+#'''
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
@@ -39,6 +39,7 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), c
 #this is for self testing
 #service = ChromeService(executable_path=ChromeDriverManager().install())
 #driver = webdriver.Chrome(service=service)
+'''
 
 tee_date_url = "https://letsgo.golf/los-verdes-golf-course/teeTimes/los-verdes-golf-course-california?date=" #the url booking a specific day
 all_days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] #default values
