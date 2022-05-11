@@ -63,10 +63,10 @@ async def message_test(date):
     #global days
     #global times
     channel = client.get_channel(845458791918469180)
-    await channel.send("current time = " + str(date.strftime("%Y-%m-%d / %H:%M:%S")))
+    await channel.send("Current Time = " + str(date.strftime("%Y-%m-%d / %H:%M:%S"))+": Booked Times: " + str(book_list))
     #await channel.send("What days and times to search: \n Days: " + str(book_times.keys()) + "\n Times: " + str("6:00am - 8:00am")) # book_times.values()
-    await channel.send("Booked Times: " + str(book_list)+'\n')
-    await channel.send("---------")
+    #await channel.send(+'\n')
+    #await channel.send("---------")
 
 def threading1():
     global book_times
