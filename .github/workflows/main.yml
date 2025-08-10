@@ -1,4 +1,4 @@
- - name: start bot
+  name: start bot
   env:
   TOKEN: ${{ secrets.TOKEN }}
   EMAIL: ${{ secrets.EMAIL }}
