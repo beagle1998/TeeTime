@@ -46,6 +46,7 @@ days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] 
 book_list = []
 
 #insert password here
+email, password = os.environ['EMAIL'], os.environ['PASSWORD'] #cho credit
 
 operational = "Online"
 service = None 
@@ -295,9 +296,9 @@ async def on_message(message):
 
 
 #print(os(dir_path).getenv("TOKEN"))
-print(os.getenv("TOKEN"))
-client.run(os.getenv("TOKEN"))
-
+# print(os.getenv("TOKEN"))
+# client.run(os.getenv("TOKEN"))
+client.run(os.getenvon("TOKEN"))
 
 
 
