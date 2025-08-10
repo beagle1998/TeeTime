@@ -38,6 +38,7 @@ days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] 
 book_list = []
 
 #insert password here
+email, password = os.environ['EMAIL'], os.environ['PASSWORD'] #cho credit
 
 def time_convert(t):#converts 1pm->1:00pm
     total = []
