@@ -50,7 +50,8 @@ for i in all_days: #can cross out later
 #days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] #all default
 book_list = {}
 
-# insert password variables here
+#insert password here
+email, password = os.environ['EMAIL'], os.environ['PASSWORD'] #cho credit
 
 operational = "Online"
 service = None 
@@ -325,20 +326,13 @@ async def on_message(message):
         operational = "offline"
     if msg.startswith('~start'):
         operational = "online"
-#api_key="E20N9WNT3FMJ"
 
 
+# print(os(dir_path).getenv("TOKEN"))
+# print(os.getenv("TOKEN"))
+# client.run(os.getenv("TOKEN"))
 
-
-
-
-
-
-print(os(dir_path).getenv("TOKEN"))
-print(os.getenv("TOKEN"))
-client.run(os.getenv("TOKEN"))
-
-
+client.run(os.getenvon("TOKEN"))
 
 
 
