@@ -334,15 +334,10 @@ async def on_message(message):
 
 
 
-#menhera    ODQxNTYyMTQ5NzAwODk0NzIw.YJoj0w.z7PZJGgTXDADJbynZIbP9CHJuQs
-#teetime OTYyMjQ1MjcxNTc4ODk4NDUy.YlEuvg.UlQBLzcVrddWKZiqP9CvOAQY_Fc
-#print(os(dir_path).getenv("TOKEN"))
-#print(os.getenv("TOKEN"))
-#client.run(os.getenv("TOKEN"))
-client.run("OTYyMjQ1MjcxNTc4ODk4NDUy.YlEuvg.UlQBLzcVrddWKZiqP9CvOAQY_Fc") # teetime
-#client.run("ODQxNTYyMTQ5NzAwODk0NzIw.YJoj0w.z7PZJGgTXDADJbynZIbP9CHJuQs") # menhera
+print(os(dir_path).getenv("TOKEN"))
+print(os.getenv("TOKEN"))
+client.run(os.getenv("TOKEN"))
 
-#https://discord.com/api/oauth2/authorize?client_id=841562149700894720&permissions=67584&scope=bot
 
 
 
