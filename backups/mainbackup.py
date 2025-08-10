@@ -71,21 +71,12 @@ async def on_message(message):
         ra=random.choice(os.listdir(locat))
         await message.channel.send(file=discord.File(locat+ra))
 
-
-api_key="E20N9WNT3FMJ"
-
-
-
-
-
-
-
-
-
+#api key check github link in main
 
 #os.getevn('TOKEN')
 
 
+client.run(os.getenvon("TOKEN"))
 
 
 
