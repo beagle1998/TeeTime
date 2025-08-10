@@ -1,4 +1,4 @@
-Discord Bot to auto reserve golf sessions
+Discord Bot to auto reserve golf sessions using discord api, heroku, selenium, etc.
 
 git add .
 git commit -m "Going to push to Heroku and Git"
