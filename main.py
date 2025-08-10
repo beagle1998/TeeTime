@@ -300,8 +300,8 @@ async def on_message(message):
 client.run(os.getenvon("TOKEN"))
 
 
-
-
+# api key can check
+# https://stackoverflow.com/questions/63003669/how-can-i-see-my-git-secrets-unencrypted
 
 
 
