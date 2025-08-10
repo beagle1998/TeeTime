@@ -286,7 +286,6 @@ async def on_message(message):
         operational = "offline"
     if msg.startswith('~start'):
         operational = "online"
-#api_key="E20N9WNT3FMJ"
 
 
 
