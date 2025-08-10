@@ -49,8 +49,9 @@ for i in all_days: #can cross out later
     book_times[i] = [all_times]
 #days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] #all default
 book_list = {}
-#email, password = "praiseper02@gmail.com", "Pyrian#863" personal dummy no credit
-email, password = "accblues@gmail.com", "peh-pye*pxr4CEK9pry"  #cho credit
+
+# insert password variables here
+
 operational = "Online"
 service = None 
 driver = None
