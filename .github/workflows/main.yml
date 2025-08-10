@@ -1,0 +1,5 @@
+ - name: start bot
+  env:
+  TOKEN: ${{ secrets.TOKEN }}
+  EMAIL: ${{ secrets.EMAIL }}
+  PASSWORD: ${{ secrets.PASSWORD }}
