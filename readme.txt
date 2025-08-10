@@ -1,3 +1,5 @@
+Discord Bot to auto reserve golf sessions
+
 git add .
 git commit -m "Going to push to Heroku and Git"
 git push  -- push to Github Master branch
