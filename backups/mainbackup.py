@@ -83,10 +83,8 @@ api_key="E20N9WNT3FMJ"
 
 
 
-#os.getevn('TOKEN)
-client.run("ODQxNTYyMTQ5NzAwODk0NzIw.YJoj0w.z7PZJGgTXDADJbynZIbP9CHJuQs")
+#os.getevn('TOKEN')
 
-#https://discord.com/api/oauth2/authorize?client_id=841562149700894720&permissions=67584&scope=bot
 
 
 
