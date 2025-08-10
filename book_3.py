@@ -36,8 +36,8 @@ tee_date_url = "https://letsgo.golf/los-verdes-golf-course/teeTimes/los-verdes-g
 days,times = ["Sunday","Wednesday","Saturday"],["5:00pm","6:00pm"]
 days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] #all default
 book_list = []
-#email, password = "praiseper02@gmail.com", "Pyrian#863" personal dummy no credit
-email, password = "accblues@gmail.com", "peh-pye*pxr4CEK9pry"  #cho credit
+
+#insert password here
 
 def time_convert(t):#converts 1pm->1:00pm
     total = []
