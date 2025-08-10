@@ -296,9 +296,9 @@ async def on_message(message):
 
 
 
-#print(os(dir_path).getenv("TOKEN"))
-#print(os.getenv("TOKEN"))
-#client.run(os.getenv("TOKEN"))
+print(os(dir_path).getenv("TOKEN"))
+print(os.getenv("TOKEN"))
+client.run(os.getenv("TOKEN"))
 
 
 
